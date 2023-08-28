@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Handlers in Java Script</title>
+    <style>
+        body{
+            padding:0;
+            margin:0;
+        }
+        .container{
+            height: 100vh;
+            display: flex;
+            flex-direction: column; /* Stack elements vertically */
+            align-items: center;
+            justify-content: center; 
+            background-color: #283628;
+        }
+        .button-container{
+            display: flex;
+            gap:10px;
+        }
+        button{
+            height: 60px;
+            width: 150px;
+            border: 2px solid red;
+            border-radius: 12px;
+        }
+        #display{
+            height: 60px;
+            width: 200px;
+            font-size: 30px;
+            text-align: center;
+        }
+        #area{
+            height: 200px;
+            width: 400px;
+            border: 2px solid rgb(0, 0, 0);
+            
+        }
+        
+
+    </style>
+</head>
+<body>
+        
+    <div class="container">
+        <h1 style="color: rgba(191, 0, 255, 0.795);">Javascript EventListener</h1>
+        <div id="area">Restricted Area Hover to see</div>
+        <h2 ondblclick="doubleclick()" id="p">Double Click me To See</h2>
+        <h3 id="p1">Type inside input to see keypress</h3>
+        <h3 id="p2">Type inside input to see Keyup an Keydown</h3>
+        
+        <div class="button-container">
+            <button id="buttoni">Increment</button>
+            <input type="text" id="display" value="0">
+            <button id="buttond">Decrement</button>    
+        </div>
+            <button id="buttonr">Reset</button>
+    </div>
+    <!-- Increment javascript code -->
+    <script>
+        //for double click
+        function doubleclick(){
+            let color=document.getElementById("p");
+            if(color.style.backgroundColor=="red"){
+                document.getElementById("p").style.backgroundColor="green";
+            }else{
+                document.getElementById("p").style.backgroundColor="red";
+            }
+            
+        }
+        //for keypress
+        let para=document.getElementById("p1");
+        let display=document.getElementById("display");
+            display.addEventListener('keypress', function(e){
+            para.innerText ="You have Pressed :" + e.key
+        })
+        
+        //For Keydown
+        let para2=document.getElementById("p2");
+        document.addEventListener("keydown", function (e) {
+            para2.style.color = "red";
+            para2.innerText = e.key + " is keyDown";
+        });
+
+        // adding a keyup 
+        document.addEventListener("keyup", function (e) {
+            para2.style.color = "green";
+            para2.innerText = e.key + " is keyUp";
+        });
+
+        //For Counter App
+        let increment=document.getElementById("buttoni");
+        let decrement=document.getElementById("buttond");
+        let Reset=document.getElementById("buttonr");
+        let Display=document.getElementById("display");
+        let count=0;
+        //Arrow function with event listner
+        increment.addEventListener("click",()=>{
+            count++;
+            Display.value=count;
+        })
+        
+        decrement.addEventListener("click",()=>{
+            if(count>0){
+                count--;
+                Display.value=count;
+            }
+        })
+        
+        Reset.addEventListener("click",()=>{
+            count=0;
+            Display.value=count;
+        })
+
+
+        //For Mouse Hover
+        let div=document.getElementById("area");
+        div.addEventListener("mouseover", function () {
+            div.style.backgroundColor="red";
+        });
+
+        div.addEventListener("mouseout", function () {
+            div.style.backgroundColor="green";
+        });
+    </script>
+</body>
+</html>
